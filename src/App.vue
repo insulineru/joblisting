@@ -1,8 +1,18 @@
 <template>
   <div id="app">
     <main :class="filterStatus && 'with-filter'">
-      <job-filter v-show="filterStatus" />
-      <job-offer v-for="job in filterJobs" :key="job.id" :job="job" />
+      <job-filter
+        v-if="filterStatus"
+        :filters="filters"
+        @removeFilter="removeFilterHandler"
+        @clearAll="filters = []"
+      />
+      <job-offer
+        v-for="job in filterJobs"
+        :key="job.id"
+        :job="job"
+        @selectFilter="filterHandler"
+        />
     </main>
   </div>
 </template>
@@ -20,10 +30,18 @@ export default {
   },
   computed: {
     filterStatus() {
-      return this.filters.length >= 0;
+      return this.filters.length > 0;
     },
     filterJobs() {
-      return this.jobs;
+      const filteredJobs = this.jobs.filter(({
+        role, level, tools, languages,
+      }) => {
+        const tags = [role, level];
+        if (tools) tags.push(...tools);
+        if (languages) tags.push(...languages);
+        return this.filters.every((filter) => tags.includes(filter));
+      });
+      return filteredJobs;
     },
   },
   data() {
@@ -145,7 +163,7 @@ export default {
           contract: 'Full Time',
           location: 'USA Only',
           languages: ['JavaScript'],
-          tools: ['Vue, Sass'],
+          tools: ['Vue', 'Sass'],
         },
         {
           id: 9,
@@ -179,6 +197,15 @@ export default {
         },
       ],
     };
+  },
+  methods: {
+    filterHandler(val) {
+      return !this.filters.includes(val) && this.filters.push(val);
+    },
+    removeFilterHandler(val) {
+      const itemIndex = this.filters.findIndex((filter) => filter === val);
+      this.filters.splice(itemIndex, 1);
+    },
   },
 };
 </script>
