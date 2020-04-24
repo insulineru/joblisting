@@ -50,7 +50,7 @@ export default {
   margin: 0 24px 40px;
   padding: 24px;
   padding-top: 37px;
-  background-color: #fff;
+  background-color: #ffffff;
   position: relative;
   border-radius: 5px;
 }
@@ -125,7 +125,7 @@ export default {
 }
 
 .label:not(:last-child)::after {
-  content: '';
+  content: "";
   position: absolute;
   right: 8px;
   top: 50%;
