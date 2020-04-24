@@ -4,7 +4,7 @@ module.exports = {
   devServer: {
     disableHostCheck: true,
   },
-  publicPath: process.env.NODE_ENV === 'production' ? '/<REPONAME>/' : '/',
+  publicPath: process.env.NODE_ENV === 'production' ? '/joblisting/' : '/',
   configureWebpack: {
     plugins: [
       new StyleLintPlugin({
