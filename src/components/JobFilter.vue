@@ -1,13 +1,13 @@
 <template>
   <div class="filter">
     <div class="tag-list">
-      <div class="tag">
-        React
-        <button class="close-button"></button>
+      <div class="tag"  v-for="filter in filters" :key="filter">
+        {{ filter }}
+        <button class="remove-button" @click="$emit('removeFilter', filter)"></button>
       </div>
     </div>
     <div class="filter-controls">
-      <button class="clear-button">Clear</button>
+      <button class="clear-button" @click="$emit('clearAll')">Clear</button>
     </div>
   </div>
 </template>
@@ -15,6 +15,12 @@
 <script>
 export default {
   name: 'JobFilter',
+  props: {
+    filters: {
+      type: Array,
+      required: true,
+    },
+  },
 };
 </script>
 
@@ -49,7 +55,7 @@ export default {
   margin: 0 16px 8px 0;
 }
 
-.close-button {
+.remove-button {
   appearance: none;
   border: 0;
   position: absolute;

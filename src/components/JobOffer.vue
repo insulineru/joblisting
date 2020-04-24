@@ -11,7 +11,7 @@
         <p class="badge badge-featured" v-if="job.featured">Featured</p>
       </div>
       <div class="row">
-        <p class="position">{{ job.position }}</p>
+        <a class="position" href="#">{{ job.position }}</a>
       </div>
       <div class="row">
         <span class="label">{{ job.postedAt }}</span>
@@ -22,11 +22,17 @@
     <hr class="divider">
     <div class="job-offer__right">
       <div class="row">
-        <p class="tag">{{ job.role }}</p>
-        <p class="tag">{{ job.level }}</p>
-        <p class="tag" v-for="tool in job.tools" :key="tool"
+        <p class="tag" @click="$emit('selectFilter', job.role)">{{ job.role }}</p>
+        <p class="tag" @click="$emit('selectFilter', job.level)">{{ job.level }}</p>
+        <p class="tag"
+          v-for="tool in job.tools"
+          :key="tool"
+          @click="$emit('selectFilter', tool)"
         >{{ tool }}</p>
-        <p class="tag" v-for="language in job.languages" :key="language"
+        <p class="tag"
+          v-for="language in job.languages"
+          :key="language"
+          @click="$emit('selectFilter', language)"
         >{{ language }}</p>
       </div>
     </div>
@@ -47,6 +53,7 @@ export default {
 
 <style scoped>
 .job-offer {
+  z-index: 10;
   margin: 0 24px 40px;
   padding: 24px;
   padding-top: 37px;
@@ -109,7 +116,13 @@ export default {
   margin: 0;
   font-weight: 700;
   line-height: 1.6;
+  text-decoration: none;
   color: hsl(180, 14%, 20%);
+  transition: color 0.15s ease;
+}
+
+.position:hover {
+  color: hsl(180, 29%, 50%);
 }
 
 .label {
@@ -152,6 +165,13 @@ export default {
   line-height: 24px;
   border-radius: 4px;
   margin: 0 16px 8px 0;
+  cursor: pointer;
+  transition: color 0.25s ease, background-color 0.25s ease;
+}
+
+.tag:hover {
+  color: #ffffff;
+  background-color: hsl(180, 29%, 50%);
 }
 
 @media screen and (min-width: 1440px) {
