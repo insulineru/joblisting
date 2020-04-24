@@ -14,7 +14,7 @@
 
 <script>
 export default {
-
+  name: 'JobFilter',
 };
 </script>
 
@@ -36,6 +36,7 @@ export default {
   display: flex;
   flex-wrap: wrap;
 }
+
 .tag {
   padding: 4px 40px 4px 8px;
   background-color: hsl(180, 52%, 96%);
@@ -57,7 +58,7 @@ export default {
   height: 100%;
   width: 32px;
   background-color: hsl(180, 29%, 50%);
-  background-image: url('../assets/images/icon-remove.svg');
+  background-image: url("../assets/images/icon-remove.svg");
   background-position: center center;
   background-repeat: no-repeat;
   border-radius: 0 4px 4px 0;

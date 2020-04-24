@@ -8,6 +8,7 @@
 </template>
 
 <script>
+/* eslint-disable max-len */
 import JobOffer from './components/JobOffer.vue';
 import JobFilter from './components/JobFilter.vue';
 
@@ -186,21 +187,21 @@ export default {
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Spartan', sans-serif;
+  font-family: "Spartan", sans-serif;
   font-size: 15px;
-
 }
 
+/* stylelint-disable selector-max-id */
 #app {
   margin: 0;
   padding: 0;
   min-height: 100vh;
 }
+/* stylelint-enable selector-max-id */
 
 main {
   padding-top: 212px;
-  background: linear-gradient(to bottom, hsl(180, 29%, 50%) 0%,
-    hsl(180, 29%, 50%) 156px,hsl(180, 52%, 96%) 156px,hsl(180, 52%, 96%) 100%);
+  background: linear-gradient(to bottom, hsl(180, 29%, 50%) 0%, hsl(180, 29%, 50%) 156px, hsl(180, 52%, 96%) 156px, hsl(180, 52%, 96%) 100%);
   transition: padding-top 0.5s ease;
 }
 
@@ -210,12 +211,12 @@ main {
 
 main::after {
   position: absolute;
-  content: '';
+  content: "";
   width: 100%;
   height: 100%;
   top: 0;
   left: 0;
-  background-image: url('./assets/images/bg-header-mobile.svg');
+  background-image: url("./assets/images/bg-header-mobile.svg");
   background-repeat: repeat-x;
   background-position: left top;
 }
@@ -226,7 +227,7 @@ main::after {
   }
 
   main::after {
-    background-image: url('./assets/images/bg-header-desktop.svg');
+    background-image: url("./assets/images/bg-header-desktop.svg");
   }
 }
 </style>
