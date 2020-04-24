@@ -1,29 +1,34 @@
 <template>
-  <div class="job-offer">
+  <div class="job-offer" :class="job.featured && 'job-offer--featured'">
     <img :src="require(`@/assets/images/${job.logo}`)" class="logo">
-    <div class="row">
-      <h3 class="title">
-        {{ job.company }}
-      </h3>
-      <p class="badge badge-new" v-if="job.new">New!</p>
-      <p class="badge badge-featured" v-if="job.featured">Featured</p>
-    </div>
-    <div class="row">
-      <p class="position">{{ job.position }}</p>
-    </div>
-    <div class="row">
-      <span class="label">{{ job.postedAt }}</span>
-      <span class="label">{{ job.contract }}</span>
-      <span class="label">{{ job.location }}</span>
+    <div class="job-offer__left">
+
+      <div class="row">
+        <h3 class="title">
+          {{ job.company }}
+        </h3>
+        <p class="badge badge-new" v-if="job.new">New!</p>
+        <p class="badge badge-featured" v-if="job.featured">Featured</p>
+      </div>
+      <div class="row">
+        <p class="position">{{ job.position }}</p>
+      </div>
+      <div class="row">
+        <span class="label">{{ job.postedAt }}</span>
+        <span class="label">{{ job.contract }}</span>
+        <span class="label">{{ job.location }}</span>
+      </div>
     </div>
     <hr class="divider">
-    <div class="row">
-      <p class="tag">{{ job.role }}</p>
-      <p class="tag">{{ job.level }}</p>
-      <p class="tag" v-for="tool in job.tools" :key="tool"
-      >{{ tool }}</p>
-      <p class="tag" v-for="language in job.languages" :key="language"
-      >{{ language }}</p>
+    <div class="job-offer__right">
+      <div class="row">
+        <p class="tag">{{ job.role }}</p>
+        <p class="tag">{{ job.level }}</p>
+        <p class="tag" v-for="tool in job.tools" :key="tool"
+        >{{ tool }}</p>
+        <p class="tag" v-for="language in job.languages" :key="language"
+        >{{ language }}</p>
+      </div>
     </div>
   </div>
 </template>
@@ -47,6 +52,11 @@ export default {
   padding-top: 37px;
   background-color: #fff;
   position: relative;
+  border-radius: 5px;
+}
+
+.job-offer--featured {
+  border-left: 5px solid hsl(180, 29%, 50%);
 }
 
 .logo {
@@ -130,6 +140,7 @@ export default {
   border: 0;
   height: 1px;
   background-color: hsl(180, 8%, 52%);
+  margin: 16px 0;
 }
 
 .tag {
@@ -140,6 +151,27 @@ export default {
   font-size: 13px;
   line-height: 24px;
   border-radius: 4px;
-  margin-right: 16px;
+  margin: 0 16px 8px 0;
+}
+
+@media screen and (min-width: 1440px) {
+  .job-offer {
+    display: flex;
+    justify-content: space-between;
+    padding-left: 152px;
+    width: 1110px;
+    margin: 0 auto 24px;
+  }
+
+  .divider {
+    display: none;
+  }
+
+  .logo {
+    left: 40px;
+    width: 88px;
+    height: 88px;
+    top: 50%;
+  }
 }
 </style>
