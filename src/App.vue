@@ -1,21 +1,33 @@
 <template>
   <div id="app">
-    <main>
-      <job-offer v-for="job in jobs" :key="job.id" :job="job" />
+    <main :class="filterStatus && 'with-filter'">
+      <job-filter v-show="filterStatus" />
+      <job-offer v-for="job in filterJobs" :key="job.id" :job="job" />
     </main>
   </div>
 </template>
 
 <script>
 import JobOffer from './components/JobOffer.vue';
+import JobFilter from './components/JobFilter.vue';
 
 export default {
   name: 'App',
   components: {
     JobOffer,
+    JobFilter,
+  },
+  computed: {
+    filterStatus() {
+      return this.filters.length >= 0;
+    },
+    filterJobs() {
+      return this.jobs;
+    },
   },
   data() {
     return {
+      filters: [],
       jobs: [
         {
           id: 1,
@@ -186,9 +198,14 @@ body {
 }
 
 main {
-  padding-top: 200px;
+  padding-top: 212px;
   background: linear-gradient(to bottom, hsl(180, 29%, 50%) 0%,
     hsl(180, 29%, 50%) 156px,hsl(180, 52%, 96%) 156px,hsl(180, 52%, 96%) 100%);
+  transition: padding-top 0.5s ease;
+}
+
+.with-filter {
+  padding-top: 296px;
 }
 
 main::after {
