@@ -1,24 +1,33 @@
 <template>
   <div id="app">
-    <header>
-      <img src="@/assets/images/bg-header-mobile.svg">
-    </header>
-    <main>
-      <job-offer v-for="job in jobs" :key="job.id" :job="job" />
+    <main :class="filterStatus && 'with-filter'">
+      <job-filter v-show="filterStatus" />
+      <job-offer v-for="job in filterJobs" :key="job.id" :job="job" />
     </main>
   </div>
 </template>
 
 <script>
 import JobOffer from './components/JobOffer.vue';
+import JobFilter from './components/JobFilter.vue';
 
 export default {
   name: 'App',
   components: {
     JobOffer,
+    JobFilter,
+  },
+  computed: {
+    filterStatus() {
+      return this.filters.length >= 0;
+    },
+    filterJobs() {
+      return this.jobs;
+    },
   },
   data() {
     return {
+      filters: [],
       jobs: [
         {
           id: 1,
@@ -186,14 +195,38 @@ body {
   margin: 0;
   padding: 0;
   min-height: 100vh;
-  background-color: hsl(180, 52%, 96%);
-}
-
-header {
-  background-color: hsl(180, 29%, 50%);
 }
 
 main {
-  padding-top: 34px;
+  padding-top: 212px;
+  background: linear-gradient(to bottom, hsl(180, 29%, 50%) 0%,
+    hsl(180, 29%, 50%) 156px,hsl(180, 52%, 96%) 156px,hsl(180, 52%, 96%) 100%);
+  transition: padding-top 0.5s ease;
+}
+
+.with-filter {
+  padding-top: 296px;
+}
+
+main::after {
+  position: absolute;
+  content: '';
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-image: url('./assets/images/bg-header-mobile.svg');
+  background-repeat: repeat-x;
+  background-position: left top;
+}
+
+@media screen and (min-width: 1440px) {
+  main {
+    padding-top: 232px;
+  }
+
+  main::after {
+    background-image: url('./assets/images/bg-header-desktop.svg');
+  }
 }
 </style>
